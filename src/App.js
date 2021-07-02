@@ -6,7 +6,8 @@ import Footer from "./components/Footer";
 import Main from "./components/Main";
 
 function App() {
-  const [pokemons, setPokemons] = useState([]);
+  const [playerOnePokemons, setPlayerOnePokemons] = useState([]);
+  const [playerTwoPokemons, setPlayerTwoPokemons] = useState([]);
   const [activePokemons, setActivePokemons] = useState(null);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -48,7 +49,8 @@ function App() {
         }
       )
       .then((jsonResult) => {
-        setPokemons(jsonResult);
+        setPlayerOnePokemons(shuffle([...jsonResult]));
+        setPlayerTwoPokemons(shuffle([...jsonResult]));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -62,12 +64,36 @@ function App() {
       <Header />
       <Switch>
         <Route path="/">
-          <Main pokemons={pokemons} setPokemon={setPokemon} />
+          <Main
+            playerOnePokemons={playerOnePokemons}
+            playerTwoPokemons={playerTwoPokemons}
+            setPokemon={setPokemon}
+          />
         </Route>
       </Switch>
       <Footer playGame={playGame} />
     </div>
   );
+}
+
+function shuffle(array) {
+  var currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
 }
 
 export default App;
