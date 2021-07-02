@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/Main";
+import Fight from "./components/Fight";
 
 function App() {
   const [playerOnePokemons, setPlayerOnePokemons] = useState([]);
@@ -101,7 +102,10 @@ function App() {
     <div className="App">
       <Header activePokemons={activePokemons} />
       <Switch>
-        <Route path="/">
+        <Route path="/arena/fight">
+          <Fight activePokemons={activePokemons} />
+        </Route>
+        <Route path="/arena/">
           <Main
             playerOnePokemons={playerOnePokemons}
             playerTwoPokemons={playerTwoPokemons}

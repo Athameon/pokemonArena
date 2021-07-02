@@ -25,7 +25,9 @@ const PokeInfo = ({ activePokemon }) => {
           <p>
             <span>Type: </span>
             {activePokemon &&
-              activePokemon.baseInfo.type.map((type) => <span>{type}</span>)}
+              activePokemon.baseInfo.type.map((type) => (
+                <span key={type}>{type}</span>
+              ))}
           </p>
           {activePokemon && <BaseInfo baseInfo={activePokemon.baseInfo.base} />}
         </div>
