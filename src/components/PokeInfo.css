@@ -1,0 +1,23 @@
+.image,
+img {
+  display: block;
+  height: 120px;
+  width: 120px;
+  background-color: blue;
+}
+
+.pokeInfo {
+  width: 50%;
+  display: flex;
+  margin-left: 50px;
+}
+.pokeData {
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 250px;
+}
+
+.base {
+  display: flex;
+  justify-content: space-between;
+}
