@@ -1,14 +1,21 @@
 import "./Pokemons.css";
-import React from "react";
+import React, { useState } from "react";
 import Pokemon from "./Pokemon";
 
 const Pokemons = ({ pokemons, player, setPokemon }) => {
+  const [activePokemon, setActivePokemon] = useState(null);
+  const selectedPokemon = (pokemon) => {
+    setPokemon(player, pokemon.id);
+    setActivePokemon(pokemon.id);
+  };
   return (
     <div className="PomemonList">
       {pokemons.map((pokemon) => (
         <div
-          onClick={() => setPokemon(player, pokemon.id)}
-          className={player == "1" ? "Pokemon red" : "Pokemon green"}
+          onClick={() => selectedPokemon(pokemon)}
+          className={`Pokemon ${player == "1" ? "red" : "green"} ${
+            activePokemon == pokemon.id && "active"
+          }`}
           key={pokemon.id}
         >
           <Pokemon pokemon={pokemon} />

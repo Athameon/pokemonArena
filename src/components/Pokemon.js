@@ -3,7 +3,7 @@ import React from "react";
 
 const Pokemon = ({ pokemon }) => {
   return (
-    <div>
+    <div className={"pokemon"}>
       <h3 className="name">{pokemon.name.english}</h3>
       <div className="type">
         {pokemon.type.map((type) => (
