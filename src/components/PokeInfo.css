@@ -9,12 +9,12 @@ img {
 .pokeInfo {
   width: 50%;
   display: flex;
-  margin-left: 50px;
+  margin-left: 5%;
 }
 .pokeData {
   width: 100%;
-  padding-left: 50px;
-  padding-right: 250px;
+  padding-left: 5%;
+  padding-right: 10%;
 }
 
 .base {

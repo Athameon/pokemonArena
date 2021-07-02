@@ -66,6 +66,8 @@ function App() {
       const winner = Math.random() > 0.5 ? 1 : 2;
       setActivePokemons({ 1: null, 2: null });
       alert(`Player ${winner} won this game!`);
+      setPlayerOnePokemons(shuffle(playerOnePokemons));
+      setPlayerTwoPokemons(shuffle(playerTwoPokemons));
     }
   };
 
@@ -103,6 +105,7 @@ function App() {
           <Main
             playerOnePokemons={playerOnePokemons}
             playerTwoPokemons={playerTwoPokemons}
+            activePokemons={activePokemons}
             setPokemon={setPokemon}
           />
         </Route>

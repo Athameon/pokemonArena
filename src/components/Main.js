@@ -2,7 +2,12 @@ import "./Main.css";
 import React from "react";
 import Pokemens from "./Pokemons";
 
-const Main = ({ playerOnePokemons, playerTwoPokemons, setPokemon }) => {
+const Main = ({
+  playerOnePokemons,
+  playerTwoPokemons,
+  activePokemons,
+  setPokemon,
+}) => {
   return (
     <div>
       <div className="Arena">
@@ -11,6 +16,7 @@ const Main = ({ playerOnePokemons, playerTwoPokemons, setPokemon }) => {
             pokemons={playerOnePokemons}
             player="1"
             setPokemon={setPokemon}
+            activePokemonInherit={activePokemons[1]}
           />
         </div>
         <div className="SecondPlayer Player">
@@ -18,6 +24,7 @@ const Main = ({ playerOnePokemons, playerTwoPokemons, setPokemon }) => {
             pokemons={playerTwoPokemons}
             player="2"
             setPokemon={setPokemon}
+            activePokemonInherit={activePokemons[2]}
           />
         </div>
       </div>

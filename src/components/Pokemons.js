@@ -2,7 +2,7 @@ import "./Pokemons.css";
 import React, { useState } from "react";
 import Pokemon from "./Pokemon";
 
-const Pokemons = ({ pokemons, player, setPokemon }) => {
+const Pokemons = ({ pokemons, player, setPokemon, activePokemonInherit }) => {
   const [activePokemon, setActivePokemon] = useState(null);
   const selectedPokemon = (pokemon) => {
     setPokemon(player, pokemon.id);
@@ -14,7 +14,7 @@ const Pokemons = ({ pokemons, player, setPokemon }) => {
         <div
           onClick={() => selectedPokemon(pokemon)}
           className={`Pokemon ${player == "1" ? "red" : "green"} ${
-            activePokemon == pokemon.id && "active"
+            activePokemonInherit && activePokemon == pokemon.id && "active"
           }`}
           key={pokemon.id}
         >
