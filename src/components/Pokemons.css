@@ -1,0 +1,25 @@
+.PomemonList {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.Pokemon {
+  height: 90px;
+  border: 10px solid yellow;
+  margin: 5px;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.Pokemon:hover {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}

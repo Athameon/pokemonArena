@@ -1,0 +1,19 @@
+/* html,
+body {
+  margin: 0px;
+  height: 100%;
+} */
+.Player {
+  width: 49%;
+  /* height: 90vh; */
+}
+
+.Arena {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 80px;
+}
+
+.playButton {
+  width: 100%;
+}

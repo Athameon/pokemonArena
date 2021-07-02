@@ -1,0 +1,9 @@
+.name {
+  display: block;
+  text-align: center;
+}
+
+.type {
+  display: flex;
+  justify-content: space-around;
+}
