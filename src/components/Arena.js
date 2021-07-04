@@ -67,6 +67,16 @@ const Arena = ({
     } else {
       const winner = Math.random() > 0.5 ? 1 : 2;
       setActivePokemons({ 1: null, 2: null });
+
+      setRounds((prev) => [
+        ...prev,
+        {
+          winner: winner === 1 ? firstTrainer._id : secondTrainer._id,
+          "Player One Pokemon": activePokemons["1"].baseInfo.id,
+          "Player Two Pokemon": activePokemons["2"].baseInfo.id,
+        },
+      ]);
+
       alert(
         `${
           winner === 1 ? firstTrainer.name : secondTrainer.name
@@ -76,6 +86,7 @@ const Arena = ({
             : activePokemons["2"].baseInfo.name.english
         }`
       );
+
       if (
         rounds.filter((round) => round.winner === firstTrainer._id).length >=
           2 &&
@@ -90,14 +101,6 @@ const Arena = ({
         alert(`Game Over: ${secondTrainer.name} won!`);
       }
 
-      setRounds((prev) => [
-        ...prev,
-        {
-          winner: winner === 1 ? firstTrainer._id : secondTrainer._id,
-          "Player One Pokemon": activePokemons["1"].baseInfo.id,
-          "Player Two Pokemon": activePokemons["2"].baseInfo.id,
-        },
-      ]);
       console.log(rounds);
 
       shufflePokemons();
@@ -113,6 +116,7 @@ const Arena = ({
           activePokemons={activePokemons}
           firstTrainer={firstTrainer}
           secondTrainer={secondTrainer}
+          rounds={rounds}
         />
         <Switch>
           <Route path="/arena/fight">

@@ -12,7 +12,7 @@ const Footer = ({ playGame }) => {
         onClick={playGame}
         className="playButton"
       >
-        Play
+        Fight
       </Button>
       <a href="https://github.com/Athameon" target="_blank">
         &copy; Benjamin Nopper

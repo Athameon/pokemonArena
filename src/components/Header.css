@@ -5,18 +5,29 @@ h1 {
   text-align: center;
 }
 .player {
-  display: inline-block;
+  display: flex;
   position: absolute;
-  padding: 5px;
+  align-items: center;
   top: 0;
 }
+.playerName {
+  padding: 5px;
+}
 .firstPlayer {
-  background-color: red;
   left: 20px;
 }
 .secondPlayer {
-  background-color: green;
   right: 20px;
+}
+.firstPlayerBackground {
+  background-color: red;
+}
+.secondPlayerBackground {
+  background-color: green;
+}
+.point {
+  padding: 5px;
+  margin: 0 5px;
 }
 .header {
   position: fixed;
