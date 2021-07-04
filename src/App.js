@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Main from "./components/Main";
-import Fight from "./components/Fight";
 import Arena from "./components/Arena";
 import PreArena from "./components/PreArena";
 
 function App() {
   const [playerOnePokemons, setPlayerOnePokemons] = useState([]);
   const [playerTwoPokemons, setPlayerTwoPokemons] = useState([]);
-  const [activePokemons, setActivePokemons] = useState({ 1: null, 2: null });
+
+  const [trainers, setTrainers] = useState(null);
+
+  const [firstTrainer, setFirstTrainer] = useState(null);
+  const [secondTrainer, setSecondTrainer] = useState(null);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -22,8 +24,28 @@ function App() {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    setIsError(false);
+    fetch("https://bennoss-pokemon.herokuapp.com/trainer/")
+      .then(
+        (result) => {
+          if (result.ok) {
+            return result.json();
+          }
+          throw Error("Failed to load the data.");
+        },
+        (error) => {
+          throw Error("Network Error." + error);
+        }
+      )
+      .then((jsonResult) => {
+        setTrainers(jsonResult);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setIsError(true);
+      });
+
+    // setIsLoading(true);
+    // setIsError(false);
     fetch("https://bennoss-pokemon.herokuapp.com/pokemon/")
       .then(
         (result) => {
@@ -55,10 +77,17 @@ function App() {
             playerOnePokemons={playerOnePokemons}
             playerTwoPokemons={playerTwoPokemons}
             shufflePokemons={shufflePokemons}
+            firstTrainer={firstTrainer}
+            secondTrainer={secondTrainer}
           />
         </Route>
         <Route path="/">
-          <PreArena />
+          <PreArena
+            trainers={trainers}
+            setTrainers={setTrainers}
+            setFirstTrainer={setFirstTrainer}
+            setSecondTrainer={setSecondTrainer}
+          />
         </Route>
       </Switch>
     </div>

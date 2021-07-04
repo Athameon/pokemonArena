@@ -5,7 +5,13 @@ import Footer from "./Footer";
 import Main from "./Main";
 import Fight from "./Fight";
 
-const Arena = ({ playerOnePokemons, playerTwoPokemons, shufflePokemons }) => {
+const Arena = ({
+  playerOnePokemons,
+  playerTwoPokemons,
+  shufflePokemons,
+  firstTrainer,
+  secondTrainer,
+}) => {
   const [activePokemons, setActivePokemons] = useState({ 1: null, 2: null });
 
   const setPokemon = async (player, pokemonId) => {
@@ -65,25 +71,33 @@ const Arena = ({ playerOnePokemons, playerTwoPokemons, shufflePokemons }) => {
     }
   };
 
-  return (
-    <>
-      <Header activePokemons={activePokemons} />
-      <Switch>
-        <Route path="/arena/fight">
-          <Fight activePokemons={activePokemons} />
-        </Route>
-        <Route path="/arena/">
-          <Main
-            playerOnePokemons={playerOnePokemons}
-            playerTwoPokemons={playerTwoPokemons}
-            activePokemons={activePokemons}
-            setPokemon={setPokemon}
-          />
-        </Route>
-      </Switch>
-      <Footer playGame={playGame} />
-    </>
-  );
+  if (!firstTrainer || !secondTrainer) {
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <>
+        <Header
+          activePokemons={activePokemons}
+          firstTrainer={firstTrainer}
+          secondTrainer={secondTrainer}
+        />
+        <Switch>
+          <Route path="/arena/fight">
+            <Fight activePokemons={activePokemons} />
+          </Route>
+          <Route path="/arena/">
+            <Main
+              playerOnePokemons={playerOnePokemons}
+              playerTwoPokemons={playerTwoPokemons}
+              activePokemons={activePokemons}
+              setPokemon={setPokemon}
+            />
+          </Route>
+        </Switch>
+        <Footer playGame={playGame} />
+      </>
+    );
+  }
 };
 
 export default Arena;
