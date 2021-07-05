@@ -27,10 +27,8 @@ const Arena = ({
       const baseInformation = playerOnePokemons.find(
         (pokemon) => pokemon.id == pokemonId
       );
-      const extendedInformation = await getExtendedInfo(baseInformation);
       const newPokemon = {
         baseInfo: baseInformation,
-        extendedInfo: extendedInformation,
       };
       setFoughtPokemonFirstTrainer((prev) => [...prev, newPokemon]);
       setActivePokemons((oldState) => ({
@@ -41,31 +39,14 @@ const Arena = ({
       const baseInformation = playerTwoPokemons.find(
         (pokemon) => pokemon.id == pokemonId
       );
-      const extendedInformation = await getExtendedInfo(baseInformation);
       const newPokemon = {
         baseInfo: baseInformation,
-        extendedInfo: extendedInformation,
       };
       setFoughtPokemonSecondTrainer((prev) => [...prev, newPokemon]);
       setActivePokemons((oldState) => ({
         1: oldState[1],
         2: newPokemon,
       }));
-    }
-  };
-
-  const getExtendedInfo = async (pokemon) => {
-    try {
-      const data = await fetch(
-        "https://pokeapi.co/api/v2/pokemon/" +
-          pokemon.name.english.toLowerCase()
-      );
-      const jsonData = await data.json();
-
-      return jsonData;
-    } catch (error) {
-      console.error(error);
-      return null;
     }
   };
 
