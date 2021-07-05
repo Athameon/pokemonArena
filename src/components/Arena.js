@@ -14,6 +14,12 @@ const Arena = ({
 }) => {
   const [activePokemons, setActivePokemons] = useState({ 1: null, 2: null });
   const [rounds, setRounds] = useState([]); //[ { winner: trainerId, pokemonOneId, pokemonTwoId}, { winner: trainerId, pokemonOneId, pokemonTwoId}, ...]
+  const [foughtPokemonFirstTrainer, setFoughtPokemonFirstTrainer] = useState(
+    []
+  );
+  const [foughtPokemonSecondTrainer, setFoughtPokemonSecondTrainer] = useState(
+    []
+  );
 
   const setPokemon = async (player, pokemonId) => {
     console.log("Player: " + player, "Pokemon: " + pokemonId);
@@ -22,11 +28,13 @@ const Arena = ({
         (pokemon) => pokemon.id == pokemonId
       );
       const extendedInformation = await getExtendedInfo(baseInformation);
+      const newPokemon = {
+        baseInfo: baseInformation,
+        extendedInfo: extendedInformation,
+      };
+      setFoughtPokemonFirstTrainer((prev) => [...prev, newPokemon]);
       setActivePokemons((oldState) => ({
-        1: {
-          baseInfo: baseInformation,
-          extendedInfo: extendedInformation,
-        },
+        1: newPokemon,
         2: oldState[2],
       }));
     } else {
@@ -34,12 +42,14 @@ const Arena = ({
         (pokemon) => pokemon.id == pokemonId
       );
       const extendedInformation = await getExtendedInfo(baseInformation);
+      const newPokemon = {
+        baseInfo: baseInformation,
+        extendedInfo: extendedInformation,
+      };
+      setFoughtPokemonSecondTrainer((prev) => [...prev, newPokemon]);
       setActivePokemons((oldState) => ({
         1: oldState[1],
-        2: {
-          baseInfo: baseInformation,
-          extendedInfo: extendedInformation,
-        },
+        2: newPokemon,
       }));
     }
   };
@@ -59,6 +69,48 @@ const Arena = ({
     }
   };
 
+  const storeResult = (winnerTrainer) => {
+    fetch("https://bennoss-pokemon.herokuapp.com/fight/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        dateTime: new Date().toUTCString(),
+        firstFighter: firstTrainer._id,
+        secondFighter: secondTrainer._id,
+        winner: winnerTrainer._id,
+        pokemonFirstFighter: foughtPokemonFirstTrainer.map(
+          (pokemon) => pokemon.baseInfo.id
+        ),
+        pokemonSecondFighter: foughtPokemonSecondTrainer.map(
+          (pokemon) => pokemon.baseInfo.id
+        ),
+      }),
+    })
+      .then(
+        (result) => {
+          if (result.ok) {
+            return result.json();
+          }
+          throw Error("Failed to store the result of the fight.");
+        },
+        (error) => {
+          throw Error("Network Error." + error);
+        }
+      )
+      .then((jsonResult) => {
+        // console.log(jsonResult);
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to store the fight result on the server.");
+        // setIsLoading(false);
+        // setIsError(true);
+      });
+  };
+
   const playGame = () => {
     console.log(activePokemons);
     if (!activePokemons || !activePokemons["1"] || !activePokemons["2"]) {
@@ -66,7 +118,12 @@ const Arena = ({
       alert("Select both Pokemons to fight.");
     } else {
       const winner = Math.random() > 0.5 ? 1 : 2;
-      setActivePokemons({ 1: null, 2: null });
+      const looser = winner === 1 ? 2 : 1;
+
+      setActivePokemons((oldState) => ({
+        ...oldState,
+        [looser]: null,
+      }));
 
       setRounds((prev) => [
         ...prev,
@@ -92,12 +149,14 @@ const Arena = ({
           2 &&
         winner === 1
       ) {
+        storeResult(firstTrainer);
         alert(`Game Over: ${firstTrainer.name} won!`);
       } else if (
         rounds.filter((round) => round.winner === secondTrainer._id).length >=
           2 &&
         winner === 2
       ) {
+        storeResult(secondTrainer);
         alert(`Game Over: ${secondTrainer.name} won!`);
       }
 
