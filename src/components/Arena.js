@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Header from "./Header";
-import Footer from "./Footer";
+import ArenaFooter from "./ArenaFooter";
 import Main from "./Main";
 import Fight from "./Fight";
 
@@ -171,7 +171,7 @@ const Arena = ({
             />
           </Route>
         </Switch>
-        <Footer playGame={playGame} />
+        <ArenaFooter playGame={playGame} />
       </>
     );
   }

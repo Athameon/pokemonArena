@@ -1,6 +1,7 @@
 import "./PreArena.css";
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 const PreArena = ({
   trainers,
@@ -98,7 +99,16 @@ const PreArena = ({
         <input type="text" name="name" />
         <input type="submit" value="Create Trainer" />
       </form>
-      <Link to="/arena">Start Arena Fight</Link>;
+      <Link to="/arena" className="arenaLink">
+        <Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          className="playButton"
+        >
+          Enter Pokemon Arena
+        </Button>
+      </Link>
     </div>
   );
 };
