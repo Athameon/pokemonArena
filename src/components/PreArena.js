@@ -94,6 +94,7 @@ const PreArena = ({
             trainers={trainers}
             setTrainer={setTrainer}
             isLoading={isLoading}
+            activeTrainer={firstTrainer}
           />
         </div>
         <div className="secondTrainer">
@@ -103,6 +104,7 @@ const PreArena = ({
             trainers={trainers}
             setTrainer={setTrainer}
             isLoading={isLoading}
+            activeTrainer={secondTrainer}
           />
         </div>
       </div>

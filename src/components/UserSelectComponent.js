@@ -1,6 +1,13 @@
 import Loader from "react-loader-spinner";
 
-const UserSelectComponent = ({ name, trainers, setTrainer, isLoading }) => {
+const UserSelectComponent = ({
+  name,
+  trainers,
+  setTrainer,
+  isLoading,
+  activeTrainer,
+}) => {
+  console.log("activeTrainer", activeTrainer);
   if (isLoading) {
     return (
       <div>
@@ -14,7 +21,15 @@ const UserSelectComponent = ({ name, trainers, setTrainer, isLoading }) => {
           <option value="-">-</option>
           {trainers &&
             trainers.map((trainer) => {
-              return (
+              return activeTrainer && activeTrainer._id === trainer._id ? (
+                <option
+                  key={{ name } + "_" + trainer._id}
+                  value={trainer._id}
+                  selected
+                >
+                  {trainer.name}
+                </option>
+              ) : (
                 <option key={{ name } + "_" + trainer._id} value={trainer._id}>
                   {trainer.name}
                 </option>
