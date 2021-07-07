@@ -87,6 +87,8 @@ function App() {
             setTrainers={setTrainers}
             setFirstTrainer={setFirstTrainer}
             setSecondTrainer={setSecondTrainer}
+            firstTrainer={firstTrainer}
+            secondTrainer={secondTrainer}
           />
         </Route>
       </Switch>
