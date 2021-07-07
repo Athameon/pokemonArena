@@ -64,41 +64,38 @@ const PreArena = ({
 
   return (
     <div>
-      <h1>Welcome to the Arena of Würzburg</h1>
-      <h2>Please Select your Trainers:</h2>
-      <div>
-        <h3>First Trainer:</h3>
-        <select onChange={setTrainer} name="firstTrainer" id="firstTrainer">
-          <option value="-">-</option>
-          {trainers &&
-            trainers.map((trainer) => {
-              return (
-                <option key={"frist_" + trainer._id} value={trainer._id}>
-                  {trainer.name}
-                </option>
-              );
-            })}
-        </select>
+      <h1 className="title">Welcome to the Arena of Würzburg</h1>
+      <h2>Select your Trainers</h2>
+      <div className="trainerSelection">
+        <div className="firstTrainer">
+          <h3>First Trainer:</h3>
+          <select onChange={setTrainer} name="firstTrainer" id="firstTrainer">
+            <option value="-">-</option>
+            {trainers &&
+              trainers.map((trainer) => {
+                return (
+                  <option key={"frist_" + trainer._id} value={trainer._id}>
+                    {trainer.name}
+                  </option>
+                );
+              })}
+          </select>
+        </div>
+        <div className="secondTrainer">
+          <h3>Second Trainer:</h3>
+          <select onChange={setTrainer} name="secondTrainer" id="secondTrainer">
+            <option value="-">-</option>
+            {trainers &&
+              trainers.map((trainer) => {
+                return (
+                  <option key={"second_" + trainer._id} value={trainer._id}>
+                    {trainer.name}
+                  </option>
+                );
+              })}
+          </select>
+        </div>
       </div>
-      <div>
-        <h3>Second Trainer:</h3>
-        <select onChange={setTrainer} name="secondTrainer" id="secondTrainer">
-          <option value="-">-</option>
-          {trainers &&
-            trainers.map((trainer) => {
-              return (
-                <option key={"second_" + trainer._id} value={trainer._id}>
-                  {trainer.name}
-                </option>
-              );
-            })}
-        </select>
-      </div>
-      <form useRef="createNewTrainerForm" onSubmit={createNewTrainer}>
-        <label for="name">New Trainer Name:</label>
-        <input type="text" name="name" />
-        <input type="submit" value="Create Trainer" />
-      </form>
       <Link to="/arena" className="arenaLink">
         <Button
           variant="contained"
@@ -109,6 +106,24 @@ const PreArena = ({
           Enter Pokemon Arena
         </Button>
       </Link>
+      <h2 className="createTrainerTitle">Create a new Trainer</h2>
+      <div className="createTrainer">
+        <form useRef="createNewTrainerForm" onSubmit={createNewTrainer}>
+          <label for="name">Name:</label>
+          <br />
+          <input type="text" name="name" />
+          <br />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            size="large"
+            className="createTrainerButton"
+          >
+            Create Trainer
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -2,4 +2,6 @@ html,
 body {
   min-height: 100%;
   position: relative;
+  margin: 0;
+  padding: 0;
 }

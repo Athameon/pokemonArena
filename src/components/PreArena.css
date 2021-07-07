@@ -1,4 +1,57 @@
+.title {
+  background: #6cf;
+  padding: 80px 0;
+  margin: 0;
+}
+
 .arenaLink {
   margin-top: 20px;
   text-decoration: none;
+}
+
+.trainerSelection {
+  display: flex;
+}
+
+.trainerSelection > div {
+  display: block;
+  width: 48%;
+  margin: 100px auto;
+  text-align: center;
+  border: 10px solid yellow;
+  margin: 5px;
+  border-radius: 15px;
+  padding: 100px;
+}
+
+.firstTrainer {
+  background-color: red;
+}
+.secondTrainer {
+  background-color: green;
+}
+
+.createTrainer {
+  background-color: blue;
+  text-align: center;
+  border: 10px solid yellow;
+  margin: 5px;
+  border-radius: 15px;
+  padding: 100px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.createTrainer label {
+  color: white;
+  padding-right: 5px;
+}
+
+.createTrainerTitle {
+  margin-top: 80px;
+}
+input {
+  margin: 10px;
 }
