@@ -11,6 +11,7 @@
 
 .trainerSelection {
   display: flex;
+  align-items: center;
 }
 
 .trainerSelection > div {
@@ -21,7 +22,8 @@
   border: 10px solid yellow;
   margin: 5px;
   border-radius: 15px;
-  padding: 100px;
+  height: 200px;
+  padding-top: 100px;
 }
 
 .firstTrainer {

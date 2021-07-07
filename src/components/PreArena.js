@@ -2,6 +2,7 @@ import "./PreArena.css";
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import UserSelectComponent from "./UserSelectComponent";
 
 const PreArena = ({
   trainers,
@@ -10,8 +11,9 @@ const PreArena = ({
   setSecondTrainer,
   firstTrainer,
   secondTrainer,
+  isLoading,
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const history = useHistory();
 
@@ -87,31 +89,21 @@ const PreArena = ({
       <div className="trainerSelection">
         <div className="firstTrainer">
           <h3>First Trainer:</h3>
-          <select onChange={setTrainer} name="firstTrainer" id="firstTrainer">
-            <option value="-">-</option>
-            {trainers &&
-              trainers.map((trainer) => {
-                return (
-                  <option key={"frist_" + trainer._id} value={trainer._id}>
-                    {trainer.name}
-                  </option>
-                );
-              })}
-          </select>
+          <UserSelectComponent
+            name="firstTrainer"
+            trainers={trainers}
+            setTrainer={setTrainer}
+            isLoading={isLoading}
+          />
         </div>
         <div className="secondTrainer">
           <h3>Second Trainer:</h3>
-          <select onChange={setTrainer} name="secondTrainer" id="secondTrainer">
-            <option value="-">-</option>
-            {trainers &&
-              trainers.map((trainer) => {
-                return (
-                  <option key={"second_" + trainer._id} value={trainer._id}>
-                    {trainer.name}
-                  </option>
-                );
-              })}
-          </select>
+          <UserSelectComponent
+            name="secondTrainer"
+            trainers={trainers}
+            setTrainer={setTrainer}
+            isLoading={isLoading}
+          />
         </div>
       </div>
       <Button

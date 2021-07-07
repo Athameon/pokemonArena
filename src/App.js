@@ -89,6 +89,7 @@ function App() {
             setSecondTrainer={setSecondTrainer}
             firstTrainer={firstTrainer}
             secondTrainer={secondTrainer}
+            isLoading={isLoading}
           />
         </Route>
       </Switch>
